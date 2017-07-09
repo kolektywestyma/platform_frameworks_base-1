@@ -122,4 +122,8 @@
 
     <!-- NightLight FOD -->
     <java-symbol type="bool" name="disable_fod_night_light"/>
+
+
+ <!-- Sensor block -->
+  <java-symbol type="array" name="config_blockPackagesSensorDrain" />
 </resources>
