@@ -5708,7 +5708,17 @@ public final class Settings {
        public static final String BATTERY_LIGHT_REALLYFULL_COLOR = "battery_light_reallyfull_color";
 
         /**
-         * whether to enable or disable vibration on failed fingerprint auth
+        *Sensor block per-package
+        * @hide
+        */
+        public static final String SENSOR_BLOCK = "sensor_block";
+
+        /**
+         * Keys we no longer back up under the current schema, but want to continue to
+         * process when restoring historical backup datasets.
+         *
+         * All settings in {@link LEGACY_RESTORE_SETTINGS} array *must* have a non-null validator,
+         * otherwise they won't be restored.
          *
          * @hide
          */
@@ -5970,7 +5980,7 @@ public final class Settings {
         /**
          * @hide
          */
-        public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";   
+        public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";
 
         /**
          * Whether to show battery estimates in QS
