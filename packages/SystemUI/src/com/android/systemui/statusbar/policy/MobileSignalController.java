@@ -128,6 +128,12 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
     private boolean mDataDisabledIcon;
     private boolean mRoamingIconAllowed;
 
+    private boolean mVolteIcon;
+    private ImsManager mImsManager;
+    private FeatureConnector<ImsManager> mFeatureConnector;
+    private int mCallState = TelephonyManager.CALL_STATE_IDLE;
+    private boolean mShowVolteIcon;
+
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
     public MobileSignalController(
@@ -272,6 +278,8 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.ROAMING_INDICATOR_ICON), false,
                     this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.SHOW_VOLTE_ICON), false,
+                    this, UserHandle.USER_ALL);
             updateSettings();
         }
 
@@ -291,6 +299,9 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
                 UserHandle.USER_CURRENT) == 1;
         mRoamingIconAllowed = Settings.System.getIntForUser(resolver,
                 Settings.System.ROAMING_INDICATOR_ICON, 1,
+                UserHandle.USER_CURRENT) == 1;
+        mVolteIcon = Settings.System.getIntForUser(resolver,
+                Settings.System.SHOW_VOLTE_ICON, 1,
                 UserHandle.USER_CURRENT) == 1;
         mConfig = Config.readConfig(mContext);
         setConfiguration(mConfig);
@@ -416,6 +427,58 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
         return getCurrentIconId();
     }
 
+    private boolean isVolteSwitchOn() {
+        return mImsManager != null && mImsManager.isEnhanced4gLteModeSettingEnabledByUser();
+    }
+
+    private void setListeners() {
+        if (mImsManager == null) {
+            Log.e(mTag, "setListeners mImsManager is null");
+            return;
+        }
+
+        try {
+            mImsManager.addCapabilitiesCallback(mCapabilityCallback,
+                    ConcurrentUtils.DIRECT_EXECUTOR);
+            mImsManager.addRegistrationCallback(mRegistrationCallback,
+                    ConcurrentUtils.DIRECT_EXECUTOR);
+            Log.d(mTag, "addCapabilitiesCallback " + mCapabilityCallback + " into " + mImsManager);
+            Log.d(mTag, "addRegistrationCallback " + mRegistrationCallback
+                    + " into " + mImsManager);
+        } catch (ImsException e) {
+            Log.d(mTag, "unable to addCapabilitiesCallback callback.");
+        }
+        queryImsState();
+    }
+
+    private void queryImsState() {
+        TelephonyManager tm = mPhone.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
+        mCurrentState.voiceCapable = tm.isVolteAvailable();
+        mCurrentState.videoCapable = tm.isVideoTelephonyAvailable();
+        mCurrentState.imsRegistered = mPhone.isImsRegistered(mSubscriptionInfo.getSubscriptionId());
+        if (DEBUG) {
+            Log.d(mTag, "queryImsState tm=" + tm + " phone=" + mPhone
+                    + " voiceCapable=" + mCurrentState.voiceCapable
+                    + " videoCapable=" + mCurrentState.videoCapable
+                    + " imsRegistered=" + mCurrentState.imsRegistered);
+        }
+        notifyListenersIfNecessary();
+    }
+
+    private void removeListeners() {
+        if (mImsManager == null) {
+            Log.e(mTag, "removeListeners mImsManager is null");
+            return;
+        }
+
+        mImsManager.removeCapabilitiesCallback(mCapabilityCallback);
+        mImsManager.removeRegistrationListener(mRegistrationCallback);
+        Log.d(mTag, "removeCapabilitiesCallback " + mCapabilityCallback
+                + " from " + mImsManager);
+        Log.d(mTag, "removeRegistrationCallback " + mRegistrationCallback
+                + " from " + mImsManager);
+    }
+
     @Override
     public void notifyListeners(SignalCallback callback) {
         // If the device is on carrier merged WiFi, we should let WifiSignalController to control
@@ -439,6 +502,13 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
         final boolean dataDisabled = (mCurrentState.iconGroup == TelephonyIcons.DATA_DISABLED
                 || (mCurrentState.iconGroup == TelephonyIcons.NOT_DEFAULT_DATA))
                 && mCurrentState.userSetup;
+
+        int resId = 0;
+        if (mCurrentState.imsRegistered && mVolteIcon) {
+            resId = R.drawable.ic_volte;
+        }
+
+        int volteId = mShowVolteIcon && isVolteSwitchOn() && mVolteIcon ? resId : 0;
 
         if (mProviderModelBehavior) {
             // Show icon in QS when we are connected or data is disabled.
