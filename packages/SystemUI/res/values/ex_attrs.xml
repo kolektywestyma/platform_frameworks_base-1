@@ -20,4 +20,7 @@
         <attr name="viewLocation" format="integer" />
     </declare-styleable>
 
+    <!-- QQS Brightness slider -->
+    <dimen name="quick_qs_brightness_margin_top">24dp</dimen>
+
 </resources>
