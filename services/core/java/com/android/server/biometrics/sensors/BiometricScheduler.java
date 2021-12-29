@@ -389,8 +389,13 @@ public class BiometricScheduler {
 
     protected void startNextOperationIfIdle() {
         if (mCurrentOperation != null) {
-            Slog.v(getTag(), "Not idle, current operation: " + mCurrentOperation);
-            return;
+            if(mCancel) {
+               Slog.v(getTag(), "Not idle, cancelling current operation: " + mCurrentOperation);
+               cancelInternal(mCurrentOperation);
+            } else {
+               Slog.v(getTag(), "Not idle, current operation: " + mCurrentOperation);
+               return;
+            }
         }
         if (mPendingOperations.isEmpty()) {
             Slog.d(getTag(), "No operations, returning to idle");
