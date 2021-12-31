@@ -6013,6 +6013,15 @@ public final class Settings {
          */
         public static final String BLUETOOTH_SHOW_BATTERY = "bluetooth_show_battery";
 
+
+        /**
+         * Arcane Idle Manager
+         * @hide
+         */
+        @Readable
+        public static final String ARCANE_IDLE_MANAGER = "arcane_idle_manager";
+
+
         /**
          * @hide
          */
