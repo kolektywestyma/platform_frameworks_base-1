@@ -6084,7 +6084,17 @@ public final class Settings {
          *
          * @hide
          */
-        public static final String[] LEGACY_RESTORE_SETTINGS = {
+
+
+        /**
+         * Arcane Idle Manager
+         * @hide
+         */
+        @Readable
+        public static final String ARCANE_IDLE_MANAGER = "arcane_idle_manager";
+
+
+       public static final String[] LEGACY_RESTORE_SETTINGS = {
         };
 
         /**
