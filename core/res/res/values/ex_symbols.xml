@@ -123,4 +123,7 @@
    <!-- Any package that has one of the package names defined below will be prevented
     from using specific sensors in order to stop battery drain -->
    <java-symbol type="array" name="config_blockPackagesSensorDrain" />
+
+   <!-- Whether to force enable multi resolution configuration for camera -->
+   <java-symbol type="bool" name="config_forceMultiResolution" />
 </resources>
