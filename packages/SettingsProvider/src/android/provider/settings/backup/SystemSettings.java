@@ -86,5 +86,10 @@ public class SystemSettings {
         Settings.System.NOTIFICATION_LIGHT_PULSE,
         Settings.System.FULLSCREEN_GESTURES,
         Settings.System.LOCKSCREEN_SMALL_CLOCK,
+        Settings.System.EDGE_LIGHT_ENABLED,
+        Settings.System.EDGE_LIGHT_ALWAYS_TRIGGER_ON_PULSE,
+        Settings.System.EDGE_LIGHT_REPEAT_ANIMATION,
+        Settings.System.EDGE_LIGHT_COLOR_MODE,
+        Settings.System.EDGE_LIGHT_CUSTOM_COLOR,
     };
 }
