@@ -63,13 +63,13 @@ public class AnyMotionDetector {
     private static final long ORIENTATION_MEASUREMENT_DURATION_MILLIS = 2500;
 
     /** The maximum duration we will collect accelerometer data. */
-    private static final long ACCELEROMETER_DATA_TIMEOUT_MILLIS = 3000;
+    private static final long ACCELEROMETER_DATA_TIMEOUT_MILLIS = 2000;
 
     /** The interval between accelerometer orientation measurements. */
-    private static final long ORIENTATION_MEASUREMENT_INTERVAL_MILLIS = 5000;
+    private static final long ORIENTATION_MEASUREMENT_INTERVAL_MILLIS = 4000;
 
     /** The maximum duration we will hold a wakelock to determine stationary status. */
-    private static final long WAKELOCK_TIMEOUT_MILLIS = 30000;
+    private static final long WAKELOCK_TIMEOUT_MILLIS = 20000;
 
     /**
      * The duration in milliseconds after which an orientation measurement is considered
@@ -276,7 +276,7 @@ public class AnyMotionDetector {
             return RESULT_STATIONARY;
         } else if (Float.isNaN(angle)) {
           /**
-           * Floating point rounding errors have caused the angle calcuation's dot product to 
+           * Floating point rounding errors have caused the angle calcuation's dot product to
            * exceed 1.0. In such case, we report RESULT_MOVED to prevent devices from rapidly
            * retrying this measurement.
            */
