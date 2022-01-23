@@ -107,4 +107,7 @@
     <java-symbol type="id" name="aerr_copy" />
     <java-symbol type="string" name="url_copy_success" />
     <java-symbol type="string" name="url_copy_failed" />
+
+    <!-- NightLight FOD -->
+   <java-symbol type="bool" name="disable_fod_night_light"/>
 </resources>
