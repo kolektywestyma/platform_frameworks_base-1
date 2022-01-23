@@ -139,4 +139,7 @@
 
     <!-- Whether key handler sends intent when changing slider position -->
     <string name="config_alertSliderIntent"></string>
+
+    <!-- NightLight FOD -->
+    <bool name="disable_fod_night_light">true</bool>
 </resources>
