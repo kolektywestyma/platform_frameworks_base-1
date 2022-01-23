@@ -62,13 +62,6 @@
 
     <!-- Home button wake -->
     <java-symbol type="bool" name="config_HomeWakeButton" />
-<<<<<<< HEAD:core/res/res/values/ex_symbols.xml
-=======
-
-    <java-symbol type="bool" name="config_intrusiveBatteryLed" />
-    <java-symbol type="bool" name="config_multiColorBatteryLed" />
-    <java-symbol type="bool" name="config_ledCanPulse" />
->>>>>>> e1ed0d8e45d8 (base: Sensor block per-package switch (1/2)):core/res/res/values/bliss_symbols.xml
 
     <!-- QQS Height -->
     <java-symbol type="dimen" name="quick_qs_total_height" />
