@@ -78,6 +78,8 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.concurrency.Execution;
 import com.android.systemui.util.time.SystemClock;
+import android.hardware.display.ColorDisplayManager;
+
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -165,6 +167,10 @@ public class UdfpsController implements DozeReceiver, UdfpsHbmProvider {
     private boolean mAttemptedToDismissKeyguard;
     private Set<Callback> mCallbacks = new HashSet<>();
     private final int mUdfpsVendorCode;
+    private boolean mDisableNightMode;
+    private boolean mNightModeActive;
+    private int mAutoModeState;
+
 
     @VisibleForTesting
     public static final AudioAttributes VIBRATION_SONIFICATION_ATTRIBUTES =
@@ -245,6 +251,9 @@ public class UdfpsController implements DozeReceiver, UdfpsHbmProvider {
         @Override
         public void showUdfpsOverlay(int sensorId, int reason,
                 @NonNull IUdfpsOverlayControllerCallback callback) {
+                  if (mDisableNightMode && isNightLightEnabled()) {
+                    disableNightMode();
+                  }
             mFgExecutor.execute(() -> {
                 final UdfpsEnrollHelper enrollHelper;
                 if (reason == IUdfpsOverlayController.REASON_ENROLL_FIND_SENSOR
@@ -260,6 +269,9 @@ public class UdfpsController implements DozeReceiver, UdfpsHbmProvider {
 
         @Override
         public void hideUdfpsOverlay(int sensorId) {
+            if (mDisableNightMode && isNightLightEnabled()) {
+              setNightMode(mNightModeActive, mAutoModeState);
+            }
             mFgExecutor.execute(() -> {
                 mServerRequest = null;
                 updateOverlay();
@@ -617,8 +629,31 @@ public class UdfpsController implements DozeReceiver, UdfpsHbmProvider {
         udfpsHapticsSimulator.setUdfpsController(this);
 
         mUdfpsVendorCode = mContext.getResources().getInteger(R.integer.config_udfps_vendor_code);
+        mDisableNightMode = mContext.getResources().getBoolean(com.android.internal.R.bool.disable_fod_night_light);
 
     }
+
+    private boolean isNightLightEnabled() {
+      return true;
+    }
+
+    private void disableNightMode() {
+      ColorDisplayManager colorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
+      mAutoModeState = colorDisplayManager.getNightDisplayAutoMode();
+      mNightModeActive = colorDisplayManager.isNightDisplayActivated();
+      colorDisplayManager.setNightDisplayActivated(false);
+    }
+
+    private void setNightMode(boolean activated, int autoMode) {
+      ColorDisplayManager colorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
+      colorDisplayManager.setNightDisplayAutoMode(0);
+      if (autoMode == 0) {
+          colorDisplayManager.setNightDisplayActivated(activated);
+        } else if (autoMode == 1 || autoMode == 2) {
+          colorDisplayManager.setNightDisplayAutoMode(autoMode);
+        }
+    }
+
 
     /**
      * Play haptic to signal udfps scanning started.
