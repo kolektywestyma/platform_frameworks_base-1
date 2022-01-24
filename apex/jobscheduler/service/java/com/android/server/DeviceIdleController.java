@@ -1602,7 +1602,7 @@ public class DeviceIdleController extends SystemService
             synchronized (this) {
                 handleMotionDetectedLocked(mConstants.INACTIVE_TIMEOUT, "non_stationary");
             }
-        } else if (result == AnyMotionDetector.RESULT_STATIONARY) {
+        } else if (result == AnyMotionDetector.RESULT_STATIONARY || true) {
             if (mState == STATE_SENSING) {
                 // If we are currently sensing, it is time to move to locating.
                 synchronized (this) {
