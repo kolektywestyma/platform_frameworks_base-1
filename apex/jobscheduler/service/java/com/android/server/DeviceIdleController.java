@@ -938,41 +938,41 @@ public class DeviceIdleController extends SystemService
         private static final String KEY_USE_WINDOW_ALARMS = "use_window_alarms";
 
         private static final long DEFAULT_FLEX_TIME_SHORT =
-                !COMPRESS_TIME ? 60 * 1000L : 5 * 1000L;
+                !COMPRESS_TIME ? 30 * 1000L : 5 * 1000L;
         private static final long DEFAULT_LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT =
-                !COMPRESS_TIME ? 60 * 1000L : 15 * 1000L;
+                !COMPRESS_TIME ? 30 * 1000L : 15 * 1000L;
         private static final long DEFAULT_LIGHT_PRE_IDLE_TIMEOUT =
-                !COMPRESS_TIME ? 3 * 60 * 1000L : 30 * 1000L;
+                !COMPRESS_TIME ? 2 * 60 * 1000L : 30 * 1000L;
         private static final long DEFAULT_LIGHT_IDLE_TIMEOUT =
-                !COMPRESS_TIME ? 5 * 60 * 1000L : 15 * 1000L;
+                !COMPRESS_TIME ? 3 * 60 * 1000L : 15 * 1000L;
         private static final long DEFAULT_LIGHT_IDLE_TIMEOUT_INITIAL_FLEX =
-                !COMPRESS_TIME ? 60 * 1000L : 5 * 1000L;
+                !COMPRESS_TIME ? 30 * 1000L : 5 * 1000L;
         private static final long DEFAULT_LIGHT_MAX_IDLE_TIMEOUT_FLEX =
-                !COMPRESS_TIME ? 15 * 60 * 1000L : 60 * 1000L;
+                !COMPRESS_TIME ? 10 * 60 * 1000L : 60 * 1000L;
         private static final float DEFAULT_LIGHT_IDLE_FACTOR = 2f;
         private static final long DEFAULT_LIGHT_MAX_IDLE_TIMEOUT =
-                !COMPRESS_TIME ? 15 * 60 * 1000L : 60 * 1000L;
+                !COMPRESS_TIME ? 10 * 60 * 1000L : 60 * 1000L;
         private static final long DEFAULT_LIGHT_IDLE_MAINTENANCE_MIN_BUDGET =
                 !COMPRESS_TIME ? 1 * 60 * 1000L : 15 * 1000L;
         private static final long DEFAULT_LIGHT_IDLE_MAINTENANCE_MAX_BUDGET =
-                !COMPRESS_TIME ? 5 * 60 * 1000L : 30 * 1000L;
+                !COMPRESS_TIME ? 3 * 60 * 1000L : 30 * 1000L;
         private static final long DEFAULT_MIN_LIGHT_MAINTENANCE_TIME =
-                !COMPRESS_TIME ? 5 * 1000L : 1 * 1000L;
+                !COMPRESS_TIME ? 3 * 1000L : 1 * 1000L;
         private static final long DEFAULT_MIN_DEEP_MAINTENANCE_TIME =
-                !COMPRESS_TIME ? 30 * 1000L : 5 * 1000L;
+                !COMPRESS_TIME ? 15 * 1000L : 5 * 1000L;
         private static final long DEFAULT_INACTIVE_TIMEOUT =
                 (30 * 60 * 1000L) / (!COMPRESS_TIME ? 1 : 10);
         private static final long DEFAULT_INACTIVE_TIMEOUT_SMALL_BATTERY =
                 (15 * 60 * 1000L) / (!COMPRESS_TIME ? 1 : 10);
         private static final long DEFAULT_SENSING_TIMEOUT =
-                !COMPRESS_TIME ? 4 * 60 * 1000L : 60 * 1000L;
+                !COMPRESS_TIME ? 2 * 60 * 1000L : 60 * 1000L;
         private static final long DEFAULT_LOCATING_TIMEOUT =
-                !COMPRESS_TIME ? 30 * 1000L : 15 * 1000L;
-        private static final float DEFAULT_LOCATION_ACCURACY = 20f;
+                !COMPRESS_TIME ? 15 * 1000L : 15 * 1000L;
+        private static final float DEFAULT_LOCATION_ACCURACY = 80f;
         private static final long DEFAULT_MOTION_INACTIVE_TIMEOUT =
-                !COMPRESS_TIME ? 10 * 60 * 1000L : 60 * 1000L;
+                !COMPRESS_TIME ? 2 * 60 * 1000L : 60 * 1000L;
         private static final long DEFAULT_MOTION_INACTIVE_TIMEOUT_FLEX =
-                !COMPRESS_TIME ? 60 * 1000L : 5 * 1000L;
+                !COMPRESS_TIME ? 30 * 1000L : 5 * 1000L;
         private static final long DEFAULT_IDLE_AFTER_INACTIVE_TIMEOUT =
                 (30 * 60 * 1000L) / (!COMPRESS_TIME ? 1 : 10);
         private static final long DEFAULT_IDLE_AFTER_INACTIVE_TIMEOUT_SMALL_BATTERY =
@@ -985,7 +985,7 @@ public class DeviceIdleController extends SystemService
         private static final long DEFAULT_QUICK_DOZE_DELAY_TIMEOUT =
                 !COMPRESS_TIME ? 60 * 1000L : 15 * 1000L;
         private static final long DEFAULT_IDLE_TIMEOUT =
-                !COMPRESS_TIME ? 60 * 60 * 1000L : 6 * 60 * 1000L;
+                !COMPRESS_TIME ? 30 * 60 * 1000L : 6 * 60 * 1000L;
         private static final long DEFAULT_MAX_IDLE_TIMEOUT =
                 !COMPRESS_TIME ? 6 * 60 * 60 * 1000L : 30 * 60 * 1000L;
         private static final float DEFAULT_IDLE_FACTOR = 2f;
