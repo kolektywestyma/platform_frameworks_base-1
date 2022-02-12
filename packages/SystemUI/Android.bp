@@ -86,6 +86,8 @@ android_library {
         "res-smartspace",
         "res",
         "res-hwkeys",
+        "res-blur",
+
     ],
     static_libs: [
         "WindowManager-Shell",
@@ -125,6 +127,7 @@ android_library {
         "themelib",
         "backgesture-google",
         "smartspace-google",
+        "AndroidSystemBlur",
     ],
     manifest: "AndroidManifest.xml",
 
