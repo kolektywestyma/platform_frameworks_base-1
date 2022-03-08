@@ -6040,12 +6040,6 @@ public final class Settings {
         public static final String FOD_NIGHT_LIGHT = "fod_night_light";
 
         /**
-        * Whether to show VoLTE icon or not
-        * @hide
-        */
-        public static final String SHOW_VOLTE_ICON = "volte_icon";
-
-        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
