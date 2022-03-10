@@ -211,6 +211,7 @@ void android_os_Process_setThreadGroup(JNIEnv* env, jobject clazz, int tid, jint
         return;
     }
 
+    SchedPolicy sp = (SchedPolicy) grp;
     int res = SetTaskProfiles(tid, {get_sched_policy_profile_name((SchedPolicy)grp)}, true) ? 0 : -1;
 
     if (res != NO_ERROR) {
