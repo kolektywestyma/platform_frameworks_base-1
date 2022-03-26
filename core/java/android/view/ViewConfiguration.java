@@ -212,17 +212,17 @@ public class ViewConfiguration {
      * Distance in dips a touch needs to be outside of a window's bounds for it to
      * count as outside for purposes of dismissing the window.
      */
-    private static final int WINDOW_TOUCH_SLOP = 16;
+    private static final int WINDOW_TOUCH_SLOP = 15;
 
     /**
      * Minimum velocity to initiate a fling, as measured in dips per second
      */
-    private static final int MINIMUM_FLING_VELOCITY = 50;
+    private static final int MINIMUM_FLING_VELOCITY = 35;
 
     /**
      * Maximum velocity to initiate a fling, as measured in dips per second
      */
-    private static final int MAXIMUM_FLING_VELOCITY = 16000;
+    private static final int MAXIMUM_FLING_VELOCITY = 12000;
 
     /**
      * Delay before dispatching a recurring accessibility event in milliseconds.
@@ -243,7 +243,7 @@ public class ViewConfiguration {
      * The coefficient of friction applied to flings/scrolls.
      */
     @UnsupportedAppUsage
-    private static final float SCROLL_FRICTION = 0.007f;
+    private static final float SCROLL_FRICTION = 0.003f;
 
     /**
      * Max distance in dips to overscroll for edge effects
