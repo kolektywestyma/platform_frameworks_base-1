@@ -172,6 +172,7 @@
         <item>com.google.android.inputmethod.latin</item>
         <item>com.google.android.apps.plus</item>
         <item>com.google.android.apps.maps</item>
+        <item>com.google.android.gms</item>
         <item>ru.ok.android</item>
         <item>com.instagram.android.MainTabActivity</item>
         <item>com.facebook.orca</item>
