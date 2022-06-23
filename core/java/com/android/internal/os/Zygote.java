@@ -36,7 +36,7 @@ import android.util.Log;
 
 import com.android.internal.net.NetworkUtilsInternal;
 
-import com.android.internal.util.crdroid.PixelPropsUtils;
+import com.android.internal.util.axiomos.PixelPropsUtils;
 
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;

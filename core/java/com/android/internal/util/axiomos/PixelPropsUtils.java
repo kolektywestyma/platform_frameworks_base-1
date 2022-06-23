@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.android.internal.util.crdroid;
+package com.android.internal.util.axiomos;
 
 import android.os.Build;
 import android.util.Log;
